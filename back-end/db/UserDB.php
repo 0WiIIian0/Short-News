@@ -5,7 +5,11 @@ session_start();
 include_once('DB.php');
 
 class UserDB extends DB {
+  
+    function __construct()
+    {
 
+    }
 
     function insert(
         $name,

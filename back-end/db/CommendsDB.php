@@ -6,6 +6,11 @@ include_once('DB.php');
 
 class CommentsDB extends DB {
 
+    function __construct()
+    {
+
+    }
+
     function insert(
         $user_id,
         $text,
@@ -84,11 +89,22 @@ class CommentsDB extends DB {
 
         }// function delete
 
+        function select($where){
+        	
+        	$sql = "select * from comments where $where";
 
+        	$cmd = $pdo->prepare($sql);
 
-	
-	    
+        	if($cmd->execute())
+		    {
+	         	echo 'O comentario foi selecionado';
+		    }
+		    else
+		    {
+	            echo 'Nao foi possivel selecionar o comentario';
+		    }
 
+        }
 }
 
 ?>

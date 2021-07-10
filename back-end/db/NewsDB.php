@@ -6,6 +6,11 @@ include_once('DB.php');
 
 class NewsDB extends DB {
 
+    function __construct()
+    {
+
+    }
+
      function insert(
         $user_id,
         $title,

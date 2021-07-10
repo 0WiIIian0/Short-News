@@ -5,7 +5,12 @@ session_start();
 include_once('DB.php');
 
 class ReportedNews extends DB {
+    
+    function __construct()
+    {
 
+    }
+    
     function insert(
         $comment_id,
         $complaint,
