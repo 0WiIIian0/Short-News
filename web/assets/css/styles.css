@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'VerminorikoAki';
+    src: url('../font/VerminorikoAki-YdGj.ttf');
+}
+
+@font-face {
+    font-family: 'JoeMax';
+    src: url('../font/JoeMax-qV2x.otf');
+}
+
+#appLogo {
+    top: 0;
+    left: 0;
+    color: #FFFFFF;
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    font-size: 80px;
+    font-family: 'VerminorikoAki';
+    text-shadow: 0 0 10px #000000;
+    background-image: linear-gradient(
+        45deg, #B2FEFA, #0ED2F7
+    );
+}
+
+.loadingMessage {
+    margin: 20px;
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+}
