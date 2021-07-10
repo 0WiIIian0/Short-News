@@ -79,36 +79,27 @@ class CommentsDB extends DB {
 
         $cmd->bindValue(":id", $_SESSION['id'] );
 
-<<<<<<< HEAD:back-end/db/CommendsDB.php
-        function select($where){
-        	
-        	$sql = "select * from comments where $where";
+	}
 
-        	$cmd = $pdo->prepare($sql);
+	function select($where){
+		
+		$sql = "select * from comments where $where";
 
-        	if($cmd->execute())
-		    {
-	         	echo 'O comentario foi selecionado';
-		    }
-		    else
-		    {
-	            echo 'Nao foi possivel selecionar o comentario';
-		    }
-=======
-        if($cmd->execute())
-        {
-            echo 'O comentario foi deletado';
-        }
-        else
-        {
-            echo 'Nao foi possivel deletar o comentario';
-        }
+		$cmd = $pdo->prepare($sql);
 
-    }// function delete
+		$cmd->execute();
 
->>>>>>> 73a52843c62a0af19691e7ec3ab4985533e543df:back-end/db/CommentsDB.php
+		if($newsList = $cmd->fetchAll())
+		{
+			return json_encode($newsList);
+		}
+		else
+		{
+			return 'Failed';
+		}
 
-        }
+	}
+
 }
 
 ?>

@@ -18,5 +18,31 @@ session_start();
         <div class="loadingMessage">Loading...</div>
     </div>
 
+    <header class="flexBox alignCenter">
+        <div class="flexBox rowDirection alignCenter">
+            <div id="mobileMenu">
+                <div class="mobileMenuIconLine"></div>
+                <div class="mobileMenuIconLine"></div>
+                <div class="mobileMenuIconLine"></div>
+            </div>
+            <div id="headerTitle">Soft News</div>
+        </div>
+        <div class="flexBox alignCenter rowDirection">
+            <div id="searchBox" class="flexBox alignCenter">
+                <input type="text">
+                <img class="hoverGrow" src="./assets/icon/search.svg">
+            </div>
+            <div id="userBox" class="flexBoxAlign">
+                <div id="userIcon" class="hoverGrow"></div>
+            </div>
+        </div>
+        <div id="userFloatMenu"></div>
+        <div id="leftMenu"></div>
+    </header>
+
+    <div id="root"></div>
+
+    <footer></footer>
+
 </body>
 </html>
