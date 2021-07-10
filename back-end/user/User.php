@@ -5,12 +5,19 @@ class User {
     private $id = '';
     private $name = '';
     private $email = '';
+    private $permissionType = '';
 
     function __construct(
         $id,
         $name,
-        $email) {
-        
+        $email,
+        $permissionType) {
+
+        $this->id = $id;
+        $this->name = $name;
+        $this->email = $email;
+        $this->permissionType = $permissionType;
+
     }
 
     function delete() {
@@ -25,11 +32,11 @@ class User {
         
     }
 
-    function changePermission() {
-        
+    function changePermissionType($newPermissionType) {
+        $this->permissionType = $newPermissionType;
     }
 
-    function checkPassword($receivedPassword) {
+    function checkPassword() {
 
     }
 
