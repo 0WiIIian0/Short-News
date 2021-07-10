@@ -30,6 +30,7 @@ class CommentsDB extends DB {
 	    {
            echo 'Nao foi possivel inserir o comentario';
 	    }
+        
 	}// function insert
 
 	function update(
@@ -63,31 +64,27 @@ class CommentsDB extends DB {
 	    }
 
 
-        }// function update
+    }// function update
 
-        function delete() { 
+    function delete() { 
 
-        	$sql = " delete from comments where id = :id ";
+        $sql = " delete from comments where id = :id ";
 
-			$cmd = $pdo->prepare($sql);
+        $cmd = $pdo->prepare($sql);
 
-			$cmd->bindValue(":id", $_SESSION['id'] );
+        $cmd->bindValue(":id", $_SESSION['id'] );
 
-			if($cmd->execute())
-		    {
-	         	echo 'O comentario foi deletado';
-		    }
-		    else
-		    {
-	            echo 'Nao foi possivel deletar o comentario';
-		    }
+        if($cmd->execute())
+        {
+            echo 'O comentario foi deletado';
+        }
+        else
+        {
+            echo 'Nao foi possivel deletar o comentario';
+        }
 
-        }// function delete
+    }// function delete
 
-
-
-	
-	    
 
 }
 

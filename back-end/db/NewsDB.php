@@ -5,7 +5,7 @@ session_start();
 include_once('DB.php');
 
 class NewsDB extends DB {
-
+	
      function insert(
         $user_id,
         $title,
@@ -84,26 +84,26 @@ class NewsDB extends DB {
 	    }
 
 
-        }// function update
+    }// function update
 
-        function delete() { 
+	function delete() { 
 
-        	$sql = " delete from noticia where id = :id ";
+		$sql = " delete from noticia where id = :id ";
 
-			$cmd = $pdo->prepare($sql);
+		$cmd = $pdo->prepare($sql);
 
-			$cmd->bindValue(":id", $_SESSION['id'] );
+		$cmd->bindValue(":id", $_SESSION['id'] );
 
-			if($cmd->execute())
-		    {
-	         	echo 'A noticia foi deletado';
-		    }
-		    else
-		    {
-	            echo 'Nao foi possivel deletar o noticia';
-		    }
+		if($cmd->execute())
+		{
+			echo 'A noticia foi deletado';
+		}
+		else
+		{
+			echo 'Nao foi possivel deletar o noticia';
+		}
 
-        }// function delete
+	}// function delete
 
 }
 
