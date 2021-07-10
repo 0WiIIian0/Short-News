@@ -21,7 +21,7 @@ class User {
     }
 
     function delete() {
-
+        
     }
 
     function changeName() {

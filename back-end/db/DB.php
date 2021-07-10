@@ -1,8 +1,8 @@
 <?php
 
 class DB {
-    
-	public $pdo;
+
+	private $pdo;
 
 	function __construct() {
 
