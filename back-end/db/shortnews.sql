@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jul-2021 às 04:38
+-- Tempo de geração: 10-Jul-2021 às 07:46
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.4.20
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `text` int(11) NOT NULL,
   `reactions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`reactions`))
@@ -99,7 +100,8 @@ CREATE TABLE `users` (
 -- Índices para tabela `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `news_comment_id` (`news_id`);
 
 --
 -- Índices para tabela `news`
@@ -164,6 +166,12 @@ ALTER TABLE `users`
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `news_comment_id` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`);
 
 --
 -- Limitadores para a tabela `news`
