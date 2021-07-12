@@ -9,12 +9,11 @@
     $name = $_POST['name'];
 	$email = $_POST['email'];
 	$pass = $_POST['pass'];
-	$permisson = 1;
     
 	$sql = " insert into users	
-					(name,email,pass,permission) 
+					(name,email,pass) 
 				 values 
-					(:name,:email,:pass,:permisson) 
+					(:name,:email,:pass) 
 				";
 
 	$cmd = $pdo->prepare($sql);
@@ -22,7 +21,6 @@
     $cmd->bindValue(":name:", $name);
 	$cmd->bindValue(":email", md5($email));
 	$cmd->bindValue(":pass" , password_hash($pass,PASSWORD_DEFAULT));
-	$cmd->bindValue(":permission", $permission);
 
 	if($cmd->execute())
 	{
