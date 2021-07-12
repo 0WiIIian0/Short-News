@@ -49,7 +49,17 @@
             if (loadEnd.currentTarget.status == 200) {
 
                 if (typeof props.complete != "undefined") {
-                    props.complete(loadEnd.currentTarget.response);
+
+                    let response = '';
+
+                    try {
+                        response = JSON.parse(loadEnd.currentTarget.response);
+                    } catch {
+                        response = loadEnd.currentTarget.response;
+                    }
+
+                    props.complete(response);
+                    
                 }
 
             }

@@ -1,7 +1,19 @@
 import UserSessionMenu from "./user/session/UserSessionMenu.js";
 
-const userFloatMenu = document.getElementById('userFloatMenu');
+(() => {
+        
+    const userFloatMenu = document.getElementById('userFloatMenu');
 
-elementManager.setDefaultMethods(userFloatMenu);
+    elementManager.setDefaultMethods(userFloatMenu);
 
-userFloatMenu.addContent(UserSessionMenu());
+    function onLogin() {
+        
+        userFloatMenu.clear();
+
+    }
+
+    userFloatMenu.addContent(
+        UserSessionMenu(onLogin)
+    );
+
+})();

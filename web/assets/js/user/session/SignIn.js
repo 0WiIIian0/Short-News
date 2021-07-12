@@ -1,16 +1,20 @@
 function sendSignInToServer(props) {
 
-    ajax({
-        url: '../back-end/user/signin.php',
-        data: props,
-        complete: (e) => {
-            userFloatMenu.clear();
-        }
+    return new Promise((resolve, reject) => {
+
+        ajax({
+            url: '../back-end/user/signin.php',
+            data: props,
+            complete: (response) => {
+                resolve(response);
+            }
+        });
+
     });
 
 }
 
-export default function SignIn() {
+export default function SignIn(onLogin) {
     
     const userEmail = createElement({
         tag: 'input',
@@ -48,10 +52,20 @@ export default function SignIn() {
                         event: {
                             on: 'click',
                             do: () => {
+
                                 sendSignInToServer({
                                     email: userEmail.value,
                                     pass: userPassword.value,
-                                })
+                                }).then((response) => {
+                                    
+                                    if (response.result == 200) {
+                                        onLogin(response);
+                                    }
+
+                                }, (error) => {
+
+                                });
+
                             }
                         }
                     })

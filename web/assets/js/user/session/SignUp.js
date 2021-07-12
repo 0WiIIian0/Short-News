@@ -1,16 +1,20 @@
 function sendSignUpToServer(props) {
 
-    ajax({
-        url: '../back-end/user/signup.php',
-        data: props,
-        complete: (e) => {
-            console.log(JSON.parse(e));
-        }
+    return new Promise((resolve, reject) => {
+
+        ajax({
+            url: '../back-end/user/signup.php',
+            data: props,
+            complete: (e) => {
+                resolve(JSON.parse(e));
+            }
+        });
+
     });
 
 }
 
-export default function SignIn() {
+export default function SignIn(onLogin) {
     
     const userName = createElement({
         tag: 'input',
@@ -57,11 +61,21 @@ export default function SignIn() {
                         event: {
                             on: 'click',
                             do: () => {
+
                                 sendSignUpToServer({
                                     name: userName.value,
                                     email: userEmail.value,
                                     pass: userPassword.value,
-                                })
+                                }).then((response) => {
+
+                                    if (response.result == 200) {
+                                        onLogin(response);
+                                    }
+
+                                }, (error) => {
+
+                                });
+
                             }
                         }
                     })

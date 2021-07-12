@@ -1,10 +1,10 @@
 import SignIn from "./SignIn.js"; 
 import SignUp from "./SignUp.js"; 
 
-export default function UserSessionMenu() {
+export default function UserSessionMenu(onLogin) {
 
-    const signIn = SignIn();
-    const signUp = SignUp();
+    const signIn = SignIn(onLogin);
+    const signUp = SignUp(onLogin);
 
     return [
         createElement({
