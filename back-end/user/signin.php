@@ -23,10 +23,14 @@
 	} else {
 
 		if (password_verify($password, $userInfo['pass'])) {
-		
+		    
+            $_SESSION['id']   = $dados['id'];
+		    $_SESSION['name'] = $dados['name'];
+
 			echo json_encode(
 				array(
-					'result' => 200
+					'result' => 200,
+					'username' => $userInfo['name'];
 				)
 			);
 	
