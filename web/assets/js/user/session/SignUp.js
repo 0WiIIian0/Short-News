@@ -5,8 +5,8 @@ function sendSignUpToServer(props) {
         ajax({
             url: '../back-end/user/signup.php',
             data: props,
-            complete: (e) => {
-                resolve(JSON.parse(e));
+            complete: (response) => {
+                resolve(response);
             }
         });
 
