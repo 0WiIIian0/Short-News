@@ -1,42 +1,63 @@
 <?php
 
-session_start();
-
 include_once('DB.php');
 
 class UserDB extends DB {
   
     function __construct()
     {
-
+		try {	
+			$this->pdo = new PDO("mysql:host=localhost;dbname=shortnews","root",""); 
+		} catch(PDOException $e) {
+			die('Failed to connect to local database.');
+		}
     }
 
     function insert(
         $name,
         $email,
-        $pass,
-        $permission_type) {
+        $pass) {
+
+		if ($this->select($email)) {
+
+			return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'User already exists'
+				)
+			);
+
+		}
 
         $sql = " insert into users	
-			(name, email, pass,permission_type) 
+			(name, email, pass) 
 			values 
-			(:name,:email,:pass,:permission_type)";
+			(:name,:email,:pass)";
 
-	    $cmd = $pdo->prepare($sql);
+	    $cmd = $this->pdo->prepare($sql);
 
-		$cmd->bindValue(":name"   		   , $name);                   
-		$cmd->bindValue(":email"           , $email); 
-		$cmd->bindValue(":pass"            , $pass);
-		$cmd->bindValue(":permission_type" , $permission_type);
+		$cmd->bindValue(":name" , $name);                   
+		$cmd->bindValue(":email", md5($email)); 
+		$cmd->bindValue(":pass" , password_hash($pass, PASSWORD_DEFAULT));
 
         if($cmd->execute())
 	    {
-         	echo 'O usuario foi inserido ';
-	    }
+			return json_encode(
+				array(
+					'result' => 200
+				)
+			);
+		}
 	    else
 	    {
-           echo 'Nao foi possivel inserir o usuario';
+			return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'Failed to register user'
+				)
+			);
 	    }
+
 	}// function insert
 
 	function update(
@@ -53,7 +74,7 @@ class UserDB extends DB {
 
 				 where id = :id";
 
-	    $cmd = $pdo->prepare($sql);
+	    $cmd = $this->pdo->prepare($sql);
 
         $id    = $_SESSION['id'];
         
@@ -74,26 +95,42 @@ class UserDB extends DB {
 	    }
 
 
-        }// function update
+	}// function update
 
-        function delete() { 
+	function delete() { 
 
-        	$sql = " delete from users where id = :id ";
+		$sql = " delete from users where id = :id ";
 
-			$cmd = $pdo->prepare($sql);
+		$cmd = $this->pdo->prepare($sql);
 
-			$cmd->bindValue(":id", $_SESSION['id'] );
+		$cmd->bindValue(":id", $_SESSION['id'] );
 
-			if($cmd->execute())
-		    {
-	         	echo 'O usuario foi deletado';
-		    }
-		    else
-		    {
-	            echo 'Nao foi possivel deletar o usuario';
-		    }
+		if($cmd->execute())
+		{
+			echo 'O usuario foi deletado';
+		}
+		else
+		{
+			echo 'Nao foi possivel deletar o usuario';
+		}
 
-        }// function delete
+	}// function delete
+
+	function select($email) {
+
+		$email = md5($email);
+
+		$sql = "SELECT * FROM users where email = :email";
+
+	    $cmd = $this->pdo->prepare($sql);
+
+		$cmd->bindValue(":email", $email);
+
+		$cmd->execute();
+
+		return $cmd->fetch();
+
+	}
 
 }
 

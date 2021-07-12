@@ -1,6 +1,6 @@
 {   
     "access": {
-        "reportedContent": true
+        "reportedContent": false
     },
     "grantPermissions": {
         "mod": false,

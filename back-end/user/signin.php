@@ -1,43 +1,47 @@
 <?php
-    session_start();
 
-    include_once("../db/DB.php");
-	
-	$my_DB = new DB();	
-	
-	$pdo = $my_DB->pdo;
+	session_start();
 
+	include_once("../db/UserDB.php");
+	
+	$userDB = new UserDB();
+	
 	$email = $_POST['email'];
-	$password = $_POST['password'];
-    
-	$sql = "select * from users where email = :email";
+	$password = $_POST['pass'];
 
-	$cmd = $pdo->prepare($sql);
+	$userInfo = $userDB->select($email);
 
-	$cmd->bindValue(":email", md5($email));
+	if (!$userInfo) {
+
+		echo json_encode(
+			array(
+				'result' => 401,
+				'message' => 'User does not exist'
+			)
+		);
+
+	} else {
+
+		if (password_verify($password, $userInfo['pass'])) {
+		
+			echo json_encode(
+				array(
+					'result' => 200
+				)
+			);
 	
-	$cmd->execute();
+		} else {
+	
+			echo json_encode(
+				array(
+					'result' => 401,
+					'message' => 'Invalid password'
+				)
+			);
+	
+		}
 
-
-	if( $dados = $cmd->fetch(PDO::FETCH_ASSOC) )
-	{
-        if(password_verify($password,$dados['pass']))
-        {
-			$_SESSION['id']   = $dados['id'];
-			$_SESSION['user'] = $dados['user'];
-
-			echo json_encode(array(
-				'result' => 200,
-				'message' => 'Sucess to login'
-			));
-        }      
-	} 
-	else 
-	{        	
-		echo json_encode(array(
-				'result' => 500,
-				'message' => 'Failed to login'
-			));
 	}
+
 
 ?>
