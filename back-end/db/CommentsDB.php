@@ -95,7 +95,10 @@ class CommentsDB extends DB {
 		}
 		else
 		{
-			return 'Failed';
+			return json_encode(array(
+				'result' => 500,
+				'message' => 'Failed to fetch news'
+			));
 		}
 
 	}

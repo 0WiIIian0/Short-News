@@ -5,16 +5,12 @@ session_start();
 include_once('DB.php');
 
 class NewsDB extends DB {
-<<<<<<< HEAD
 
     function __construct()
     {
 
     }
 
-=======
-	
->>>>>>> 73a52843c62a0af19691e7ec3ab4985533e543df
      function insert(
         $user_id,
         $title,

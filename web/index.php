@@ -18,6 +18,8 @@ session_start();
         <div class="loadingMessage">Loading...</div>
     </div>
 
+    <div id="userFloatMenu"></div>
+    
     <header class="flexBox alignCenter">
         <div class="flexBox rowDirection alignCenter">
             <div id="mobileMenu">
@@ -36,13 +38,16 @@ session_start();
                 <div id="userIcon" class="hoverGrow"></div>
             </div>
         </div>
-        <div id="userFloatMenu"></div>
         <div id="leftMenu"></div>
     </header>
 
     <div id="root"></div>
 
     <footer></footer>
+
+    <script src="./assets/js/ajax.js"></script>
+    <script src="./assets/js/elementManager.js"></script>
+    <script src="./assets/js/menu.js"></script>
 
 </body>
 </html>

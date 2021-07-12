@@ -39,6 +39,7 @@ header {
     left: 0;
     width: 100%;
     height: 100px;
+    z-index: 10;
     position: fixed;
     box-shadow: 0 0 10px #000000;
     background-color: #000000;
@@ -96,7 +97,7 @@ header {
 
 #searchBox img {
     width: 30px;
-    margin: 0 10px;
+    margin: 10px 10px;
 }
 
 #userBox {
@@ -124,20 +125,50 @@ header {
     height: 400px;
     display: none;
     position: fixed;
-    box-shadow: 0 0 20px #000000;
+    z-index: 8;
+    animation: fadeInSlideBottom linear 0.3s;
+    box-shadow: 0 10px 20px #000000;
     border-radius: 0 0 20px 20px;
     background-color: #222222;
 }
 
+@keyframes fadeInSlideBottom {
+
+    0% {
+        opacity: 0;
+        margin-top: -400px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+}
+
+@keyframes fadeOutSlideTop {
+
+    0% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: -400px;
+    }
+
+}
+
 #leftMenu {
     top: 100px;
-    left: 0;
+    left: calc(-90% + 20px);
     width: 80%;
     height: 100%;
-    display: none;
     position: fixed;
     box-shadow: 0 0 10px #000000;
     background-color: #000000;
+    transition-duration: 0.4s;
 }
 
 #root {
@@ -152,4 +183,12 @@ footer {
     width: 100%;
     min-height: 300px;
     background-color: #000000;
+}
+
+@media only screen and (max-width: 900px) {
+
+    #searchBox input {
+        display: none;
+    }
+
 }
