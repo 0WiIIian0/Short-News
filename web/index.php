@@ -9,6 +9,7 @@ session_start();
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css">
     <link type="text/css" rel="stylesheet" href="./assets/css/elementManager.css">
     <link type="text/css" rel="stylesheet" href="./assets/css/simplified.css">
+    <link type="text/css" rel="stylesheet" href="./assets/css/UserMenu.css">
     <title>Soft Notes</title>
 </head>
 <body>
@@ -18,7 +19,7 @@ session_start();
         <div class="loadingMessage">Loading...</div>
     </div>
 
-    <div id="userFloatMenu"></div>
+    <div id="userFloatMenu" class="flexBox columnDirection fragmentView"></div>
     
     <header class="flexBox alignCenter">
         <div class="flexBox rowDirection alignCenter">
@@ -48,6 +49,7 @@ session_start();
     <script src="./assets/js/ajax.js"></script>
     <script src="./assets/js/elementManager.js"></script>
     <script src="./assets/js/menu.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 
 </body>
 </html>

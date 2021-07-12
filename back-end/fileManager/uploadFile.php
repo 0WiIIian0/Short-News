@@ -17,7 +17,7 @@
         
         echo json_encode(
             array(
-                'result' => 200,
+                'result' => 201,
                 'fileName' => $fileName.'.'.$fileExtension
             )
         );

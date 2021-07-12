@@ -1,0 +1,33 @@
+.fragmentView {
+    color: #FFFFFF;
+    overflow: hidden;
+}
+
+.fragmentSliderMenu {
+    flex: 1;
+    min-height: 70px;
+}
+
+.fragmentOption {
+    flex: 1;
+    cursor: pointer;
+    font-size: 18px;
+    transition-duration: 0.3s;
+}
+
+.fragmentOption:hover {
+    background-color: #333333;
+}
+
+.fragmentSlider {
+    flex: 8;
+}
+
+.fragmentSlider .fragment {
+    flex: 1;
+    min-width: 100%;
+    min-height: 100%;
+    transition-duration: 0.3s;
+}
+
+

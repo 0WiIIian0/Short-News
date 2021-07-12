@@ -19,6 +19,7 @@
         if (userFloatMenu.style.display == 'flex') {
 
             userFloatMenu.style.animation = 'fadeOutSlideTop linear 0.3s';
+            userFloatMenu.style.zIndex = 8;
 
             setTimeout(() => {
                 userFloatMenu.style.display = 'none';
@@ -33,9 +34,15 @@
         if (userFloatMenu.style.display != 'flex') {
             userFloatMenu.style.display = 'flex';
             userFloatMenu.style.animation = 'fadeInSlideBottom linear 0.3s';
+
+            setTimeout(() => {
+                userFloatMenu.style.zIndex = 11;
+            }, 310);
+
         } else {
 
             userFloatMenu.style.animation = 'fadeOutSlideTop linear 0.3s';
+            userFloatMenu.style.zIndex = 8;
 
             setTimeout(() => {
                 userFloatMenu.style.display = 'none';
