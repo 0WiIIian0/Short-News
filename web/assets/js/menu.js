@@ -49,4 +49,20 @@
 
     }
 
+    const uploadFile = document.getElementById('uploadFile');
+
+    uploadFile.onchange = (e) => {
+
+        ajax({
+            url: '../back-end/fileManager/uploadFile.php',
+            files: {
+                file: uploadFile.files[0]
+            },
+            complete: (e) => {
+                console.log(JSON.parse(e));
+            }
+        });
+
+    }
+
 })();

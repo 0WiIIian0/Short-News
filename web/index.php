@@ -18,7 +18,9 @@ session_start();
         <div class="loadingMessage">Loading...</div>
     </div>
 
-    <div id="userFloatMenu"></div>
+    <div id="userFloatMenu">
+        <input id="uploadFile" type="file">
+    </div>
     
     <header class="flexBox alignCenter">
         <div class="flexBox rowDirection alignCenter">

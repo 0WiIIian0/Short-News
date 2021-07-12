@@ -36,6 +36,14 @@
 
         }
 
+        if (typeof props.files != "undefined") {
+
+            for (let item in props.files) {
+                data.append(item, props.files[item]);
+            }
+
+        }
+
         request.onloadend = (loadEnd) => {
 
             if (loadEnd.currentTarget.status == 200) {
