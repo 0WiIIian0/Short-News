@@ -49,7 +49,7 @@
 
     }
 
-    const uploadFile = document.getElementById('uploadFile');
+    /*const uploadFile = document.getElementById('uploadFile');
 
     uploadFile.onchange = (e) => {
 
@@ -63,6 +63,6 @@
             }
         });
 
-    }
+    }*/
 
 })();
