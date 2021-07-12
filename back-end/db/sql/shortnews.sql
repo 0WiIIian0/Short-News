@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jul-2021 às 07:46
+-- Tempo de geração: 12-Jul-2021 às 05:20
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.4.20
 
@@ -55,6 +55,19 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `description` int(11) NOT NULL,
+  `permissions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`permissions`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `reported_comments`
 --
 
@@ -89,7 +102,7 @@ CREATE TABLE `users` (
   `name` text NOT NULL,
   `email` text NOT NULL,
   `pass` text NOT NULL,
-  `permission_type` tinyint(4) NOT NULL
+  `permission` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -111,6 +124,12 @@ ALTER TABLE `news`
   ADD KEY `news_user_id` (`user_id`) USING BTREE;
 
 --
+-- Índices para tabela `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `reported_comments`
 --
 ALTER TABLE `reported_comments`
@@ -127,7 +146,8 @@ ALTER TABLE `reported_news`
 -- Índices para tabela `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permission_id` (`permission`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -143,6 +163,12 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT de tabela `news`
 --
 ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `permissions`
+--
+ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -184,6 +210,12 @@ ALTER TABLE `news`
 --
 ALTER TABLE `reported_news`
   ADD CONSTRAINT `reported_news_id` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`);
+
+--
+-- Limitadores para a tabela `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `permission_id` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
