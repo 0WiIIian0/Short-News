@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Jul-2021 às 05:20
+-- Tempo de geração: 12-Jul-2021 às 07:08
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.4.20
 
@@ -60,10 +60,17 @@ CREATE TABLE `news` (
 
 CREATE TABLE `permissions` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  `description` int(11) NOT NULL,
+  `name` tinytext NOT NULL,
+  `description` text NOT NULL,
   `permissions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`permissions`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `description`, `permissions`) VALUES
+(1, '0', '0', '{\"access\":{\"reportedContent\":false},\"grantPermissions\":{\"mod\":false,\"admin\":false}}');
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,8 @@ CREATE TABLE `users` (
   `name` text NOT NULL,
   `email` text NOT NULL,
   `pass` text NOT NULL,
-  `permission` int(4) NOT NULL
+  `permission` int(4) NOT NULL DEFAULT 1,
+  `is_reporter` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -169,7 +177,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT de tabela `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `reported_comments`

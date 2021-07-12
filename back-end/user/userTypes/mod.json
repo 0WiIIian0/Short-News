@@ -1,0 +1,9 @@
+{   
+    "access": {
+        "reportedContent": true
+    },
+    "grantPermissions": {
+        "mod": false,
+        "admin": false
+    }
+}

@@ -20,7 +20,12 @@ export default function UserSessionMenu() {
                             do: () => {
                                 
                                 signIn.setStyle({
+                                    opacity: 1,
                                     marginLeft: '0px'
+                                });
+
+                                signUp.setStyle({
+                                    opacity: 0
                                 });
 
                             }
@@ -33,7 +38,12 @@ export default function UserSessionMenu() {
                             do: () => {
 
                                 signIn.setStyle({
+                                    opacity: 0,
                                     marginLeft: '-100%'
+                                });
+
+                                signUp.setStyle({
+                                    opacity: 1
                                 });
 
                             }
