@@ -7,7 +7,7 @@ export default function UserSessionMenu(onLogin) {
     const signUp = SignUp(onLogin);
 
     const signInButton = createElement({
-        class: 'fragmentOption flexBoxAlign',
+        class: 'fragmentOption flexBoxAlign selected',
         ripple: '#555555',
         content: 'Sign-In'
     });

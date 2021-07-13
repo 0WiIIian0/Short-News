@@ -7,7 +7,7 @@
             array(
                 'result' => 200,
                 'username' => $_SESSION['name'],
-                'canPostNews' => $_SESSION['canPostNews']
+                'canPostNews' => $_SESSION['can_post_news']
             )
         );
     }
