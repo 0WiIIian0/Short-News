@@ -1,23 +1,63 @@
 export default function Modal() {
 
+    let onOpenListenerList = new Array();
+    let onCloseListenerList = new Array();
+
     const modal = createElement({
-        class: 'modal'
+        class: 'modal flexBoxAlign',
+        event: {
+            on: 'click',
+            do: (event) => {
+
+                if (event.target == modal) {
+                    modal.close();
+                }
+
+            }
+        }
     });;
+
+    modal.isOpen = false;
 
     modal.open = () => {
         
+        modal.addTo(document.body);
+        modal.isOpen = true;
+        
+        onOpenListenerList.forEach((action) => {
+            action();
+        });
+
         modal.setStyle({
-            display: 'flex'
+            animation: 'fadeIn linear 0.3s'
         });
 
     }
 
-    modal.open = () => {
+    modal.close = () => {
         
+        modal.isOpen = false;
+
         modal.setStyle({
-            display: 'none'
+            animation: 'fadeOut linear 0.3s'
+        });
+        
+        onCloseListenerList.forEach((action) => {
+            action();
         });
 
+        setTimeout(() => {
+            document.body.removeChild(modal);
+        }, 290);
+
+    }
+
+    modal.addOnOpenListener = (action) => {
+        onOpenListenerList.push(action);
+    }
+
+    modal.addOnCloseListener = (action) => {
+        onCloseListenerList.push(action);
     }
 
     return modal;

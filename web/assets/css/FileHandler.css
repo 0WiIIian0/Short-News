@@ -1,0 +1,58 @@
+.fileIcon {
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 0 10px #000000;
+    border-radius: 20px;
+}
+
+.fileIcon img {
+    width: 150px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.fileIcon .name {
+    color: #DDDDDD;
+    font-size: 20px;
+}
+
+
+/*    width: 150px;
+    left: calc(-100% + 150px);
+    height: 100%;
+    position: relative;
+    background-color: orange;*/
+
+.fileIcon .deleteButton {
+    left: -100%;
+    width: 150px;
+    height: 100%;
+    display: none;
+    position: relative;
+    animation: fadeIn linear 0.2s;
+    border-radius: 10px;
+    margin-right: -150px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.fileIcon:hover .deleteButton {
+    display: flex;
+}
+
+.fileIcon:hover .deleteButton img {
+    width: 30px;
+    margin-right: unset;
+}
+
+.deleteButtonIcon {
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 0 10px #000000;
+    border-radius: 30px;
+    transition-duration: 0.3s;
+    background-color: #aaaaaad3;
+}
+
+.deleteButtonIcon:hover {
+    background-color: #ff5878;
+}

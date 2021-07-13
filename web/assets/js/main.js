@@ -15,7 +15,11 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
         on: 'click',
         do: () => {
 
-
+            if (postNews.isOpen) {
+                postNews.close();
+            } else {
+                postNews.open();
+            }
 
         }
     })
@@ -48,7 +52,9 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
             overflow: 'auto'
         });
 
-        postNewsFloatinButton.addTo(document.body);
+        if (sessionInfo.canPostNews == '1') {
+            postNewsFloatinButton.addTo(document.body);
+        }
 
     }
 

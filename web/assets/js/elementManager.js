@@ -324,7 +324,10 @@
 
         function removePointerEvents(e) {
 
-            e.style.pointerEvents = 'none';
+
+            if (!e.hasRippleEffect) {
+                e.style.pointerEvents = 'none';
+            }
 
             if (e.children[0] != null) {
 
@@ -341,6 +344,7 @@
         removePointerEvents(element);
 
         element.style.pointerEvents = 'all';
+        element.hasRippleEffect = true;
 
         let lastStyleSettings;
 
@@ -372,6 +376,10 @@
         element.on({
             on: ['mousedown', 'touchstart'],
             do: function(e) {
+
+                if (e.target != element && e.target.hasRippleEffect) {
+                    return;
+                }
 
                 if (rippleElement.active === true) {
                     return;

@@ -1,3 +1,10 @@
+#postNews {
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+    background-color: #222222;
+}
+
 #PostNewsFloatinButton {
     right: 20px;
     bottom: 20px;
@@ -13,4 +20,64 @@
 #PostNewsFloatinButton img {
     width: 35px;
     z-index: 10;
+}
+
+#postNews .title {
+    color: #FFFFFF;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    font-size: 30px;
+    box-shadow: 0 0 10px #000000;
+}
+
+#postNews input,
+#postNews textarea {
+    width: 90%;
+    max-width: calc(90% - 40px);
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    padding: 20px;
+    font-size: 36px;
+    border-radius: 20px;
+    background-color: #333333;
+}
+
+#postNews input {
+    margin: 5px 0;
+}
+
+#postNews .newsTitle {
+    margin-top: 40px;
+}
+
+#postNews textarea {
+    margin: 30px 0;
+    resize: vertical;
+    min-height: 500px;
+}
+
+#postNews .fileInput {
+    color: #DDDDDD;
+    margin: 20px;
+    padding: 10px 20px;
+    min-height: 60px;
+    position: relative;
+    font-size: 20px;
+    margin-right: 10px;
+    border-radius: 20px;
+    background-color: #333333;
+}
+
+#postNews .fileInput img {
+    width: 30px;
+}
+
+#postNews .fileInputContainer {
+    border: 4px dashed #DDDDDD;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
 }
