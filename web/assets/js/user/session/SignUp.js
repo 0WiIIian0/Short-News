@@ -67,11 +67,7 @@ export default function SignIn(onLogin) {
                                     email: userEmail.value,
                                     pass: userPassword.value,
                                 }).then((response) => {
-
-                                    if (response.result == 200) {
-                                        onLogin(response);
-                                    }
-
+                                    onLogin(response);
                                 }, (error) => {
 
                                 });

@@ -8,6 +8,10 @@
     min-height: 70px;
 }
 
+.fragmentSliderMenu .selected {
+    background-color: #333333;
+}
+
 .fragmentOption {
     flex: 1;
     cursor: pointer;

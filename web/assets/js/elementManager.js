@@ -678,6 +678,11 @@
             return element;
         }
 
+        element.removeClass = (className) => {
+            element.classList.remove(className);
+            return element;
+        }
+
         element.setID = (id) => {
             element.id = id;
             return element;
