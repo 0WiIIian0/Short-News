@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include_once('../db/NewsDB.php');
 
 class News {
@@ -24,6 +25,11 @@ class News {
 
         $this->db->select($whereClause);
 
+    }
+
+    function post($title,$subtitle,$content,$category)
+    {
+    	$this->db->insert($_SESSION['id'],$title,$subtitle,$content,$category);
     }
 
 }

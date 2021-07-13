@@ -5,8 +5,7 @@ session_start();
 include_once('DB.php');
 
 class NewsDB extends DB {
-	
-    
+
     function __construct()
     {
 		try {	
@@ -16,37 +15,44 @@ class NewsDB extends DB {
 		}
     }
 
-    function insert(
+     function insert(
         $user_id,
         $title,
         $subtitle,
         $content,
-        $category,
-        $reactions) {
+        $category
+        ) {
 
         $sql = " insert into news	
-			(user_id, title, subtitle,content,category,reactions) 
+			(user_id, title, subtitle,content,category) 
 			values 
-			(:user_id,:title,:subtitle,:content,:category,:reactions)";
+			(:user_id,:title,:subtitle,:content,:category)";
 
-	    $cmd = $this->pdo->prepare($sql);
+	    $cmd = $this->$pdo->prepare($sql);
 
 		$cmd->bindValue(":user_id"   		, $user_id);                   
 		$cmd->bindValue(":title"            , $title); 
 		$cmd->bindValue(":subtitle"         , $subtitle);
 		$cmd->bindValue(":content" 			, $content);
 		$cmd->bindValue(":category"         , $category);
-		$cmd->bindValue(":reactions"        , $reactions);
 
         if($cmd->execute())
 	    {
-         	echo 'A noticia foi inserido ';
+         	return json_encode(
+				array(
+					'result' => 200
+				)
+			);
 	    }
 	    else
 	    {
-           echo json_encode($cmd->errorInfo());
+           return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'Failed to register news'
+				)
+			);
 	    }
-		
 	}// function insert
 
 	function update(
@@ -69,7 +75,7 @@ class NewsDB extends DB {
 
 				 where id = :id";
 
-	    $cmd = $pdo->prepare($sql);
+	    $cmd = $this->$pdo->prepare($sql);
 
         $id    = $_SESSION['id'];
         
@@ -85,11 +91,20 @@ class NewsDB extends DB {
 
 	    if($cmd->execute())
 	    {
-         	echo 'A noticia foi atualizado';
+         	return json_encode(
+				array(
+					'result' => 200
+				)
+			);
 	    }
 	    else
 	    {
-            echo 'Nao foi possivel atuzalizar a noticia';
+            return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'Failed to update news'
+				)
+			);
 	    }
 
 
@@ -99,17 +114,26 @@ class NewsDB extends DB {
 
 		$sql = " delete from noticia where id = :id ";
 
-		$cmd = $pdo->prepare($sql);
+		$cmd = $this->$pdo->prepare($sql);
 
 		$cmd->bindValue(":id", $_SESSION['id'] );
 
 		if($cmd->execute())
 		{
-			echo 'A noticia foi deletado';
+			return json_encode(
+				array(
+					'result' => 200
+				)
+			);
 		}
 		else
 		{
-			echo 'Nao foi possivel deletar o noticia';
+			return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'Failed to delete news'
+				)
+			);
 		}
 
 	}// function delete
