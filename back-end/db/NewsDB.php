@@ -28,7 +28,7 @@ class NewsDB extends DB {
 			values 
 			(:user_id,:title,:subtitle,:content,:category)";
 
-	    $cmd = $this->$pdo->prepare($sql);
+	    $cmd = $this->pdo->prepare($sql);
 
 		$cmd->bindValue(":user_id"   		, $user_id);                   
 		$cmd->bindValue(":title"            , $title); 
@@ -75,7 +75,7 @@ class NewsDB extends DB {
 
 				 where id = :id";
 
-	    $cmd = $this->$pdo->prepare($sql);
+	    $cmd = $this->pdo->prepare($sql);
 
         $id    = $_SESSION['id'];
         
@@ -114,7 +114,7 @@ class NewsDB extends DB {
 
 		$sql = " delete from noticia where id = :id ";
 
-		$cmd = $this->$pdo->prepare($sql);
+		$cmd = $this->pdo->prepare($sql);
 
 		$cmd->bindValue(":id", $_SESSION['id'] );
 

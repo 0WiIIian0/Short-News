@@ -5,6 +5,7 @@
     height: 60px;
     position: fixed;
     z-index: 10;
+    animation: zoomInFadeIn linear 0.3s;
     border-radius: 50%;
     background-color: #444444;
 }

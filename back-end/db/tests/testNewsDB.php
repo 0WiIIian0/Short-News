@@ -1,6 +1,6 @@
 <?php
 
-include_once('./NewsDB.php');
+include_once('../NewsDB.php');
 
 date_default_timezone_set('UTC');
 
@@ -26,7 +26,7 @@ $content = json_encode(
     $reactions,
     $post_date */
 
-$newsDB->insert(
+echo $newsDB->insert(
     10,
     "Test News",
     "News description",

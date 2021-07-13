@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Jul-2021 às 03:38
+-- Tempo de geração: 13-Jul-2021 às 06:27
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.4.20
 
@@ -33,6 +33,13 @@ CREATE TABLE `category_news` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `category_news`
+--
+
+INSERT INTO `category_news` (`id`, `name`, `description`) VALUES
+(1, 'sports', 'news about sport');
+
 -- --------------------------------------------------------
 
 --
@@ -60,9 +67,9 @@ CREATE TABLE `news` (
   `subtitle` text NOT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`content`)),
   `category` int(11) NOT NULL,
-  `reactions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`reactions`)),
-  `post_date` date NOT NULL,
-  `views` int(11) NOT NULL
+  `reactions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '"{"likes":0,"dislikes":0}"',
+  `post_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `views` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -83,7 +90,10 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `description`, `permissions`) VALUES
-(1, '0', '0', '{\"access\":{\"reportedContent\":false},\"grantPermissions\":{\"mod\":false,\"admin\":false}}');
+(1, 'user', 'Default user', '{\"access\":{\"reportedContent\":false},\"grantPermissions\":{\"mod\":false,\"admin\":false}}'),
+(2, 'reporter', 'User that can post news', '{\"access\":{\"reportedContent\":false},\"grantPermissions\":{\"mod\":false,\"admin\":false}}'),
+(3, 'moderator', 'System moderator, can delete/edit someone else news and have access to reported comments and news', '{\"access\":{\"reportedContent\":true},\"grantPermissions\":{\"mod\":true,\"admin\":false}}'),
+(4, 'admin', 'System admin, have all permissions possible', '{\"access\":{\"reportedContent\":true},\"grantPermissions\":{\"mod\":true,\"admin\":true}}');
 
 -- --------------------------------------------------------
 
@@ -131,10 +141,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `permission`, `can_post_news`) VALUES
-(5, 'Tester', 'b642b4217b34b1e8d3bd915fc65c4452', '$2y$10$npVMdP9C8hgAxYzxdZHLkeoH13yRbJ9EfgD2P0jVCapsPHUgBA9xG', 1, 0),
-(6, 'Level', '0869f56e051fd1e7feaf189fd07aa229', '$2y$10$5ICLyPhBVPikAwQz6qZHZ..ljGf8PhxoYDlFTAi.HQrAZvJFW1R.q', 1, 0),
-(7, 'Aleatorio', '7434c550a1eb7f04711753f14ddb1a31', '$2y$10$xtGtKcPsnrg9yLDMIm3T7OrsNZMNCpY7uDkSL1mQ9F5Rs3OHkUnw.', 1, 0),
-(9, 'NovoUsuario', 'e29c5f59032c0a75d3059b95f26b9703', '$2y$10$YK1VxrVZlkszbqhogkG0POfhXzty71JwOHWtcEv0BMyQBeurYGvOi', 1, 0);
+(10, 'Admin', '64e1b8d34f425d19e1ee2ea7236d3028', '$2y$10$JGdS7yVsJexf2EVlFvafKOQtkS.uIOkhNSB916Y6CnwSH.eVaSxmy', 1, 0),
+(11, 'Reporter', '9226df98db5a8ae30a6c30c9c092a0c5', '$2y$10$8hQOnR5hd7g.ylse6UxKae5XdQBggNlzvII2euyHoOh0k254p946K', 1, 1),
+(12, 'Moderator', 'e3c5f586d1ee978ef40059cfed95b1ee', '$2y$10$I9aeCS4TIPy.1EsWMKHBAO9WkeRdTOr0Ui6a6bGlnRAjm.S2dGv8u', 1, 0),
+(13, 'Reader', '88b87698be0bc461f3cacf1f080929d5', '$2y$10$mVgZvaUNRQgc.eqO9yeM2OACzRr62LN5drPlH5B/wmEeGmQjhfWgu', 1, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -195,7 +205,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `category_news`
 --
 ALTER TABLE `category_news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `comments`
@@ -207,13 +217,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT de tabela `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `reported_comments`
@@ -231,7 +241,7 @@ ALTER TABLE `reported_news`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restrições para despejos de tabelas

@@ -1,3 +1,4 @@
+import PostNews from "./PostNews/PostNews.js";
 import PostNewsFloatinButton from "./PostNews/PostNewsFloatingButton.js";
 import UserLoggedSession from "./user/session/UserLoggedSession.js";
 import UserSessionMenu from "./user/session/UserSessionMenu.js";
@@ -5,8 +6,19 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
 (() => {
         
     const userFloatMenu = document.getElementById('userFloatMenu');
+    const postNews = PostNews();
+    const postNewsFloatinButton = PostNewsFloatinButton();
 
     elementManager.setDefaultMethods(userFloatMenu);
+
+    postNewsFloatinButton.on({
+        on: 'click',
+        do: () => {
+
+
+
+        }
+    })
 
     function onLogout() {
 
@@ -17,6 +29,10 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
         userFloatMenu.setStyle({
             overflow: 'hidden'
         });
+
+        if (postNewsFloatinButton.parentElement != null) {
+            document.body.removeChild(postNewsFloatinButton);
+        }
 
     }
 
@@ -32,7 +48,7 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
             overflow: 'auto'
         });
 
-        PostNewsFloatinButton().addTo(document.body);
+        postNewsFloatinButton.addTo(document.body);
 
     }
 
