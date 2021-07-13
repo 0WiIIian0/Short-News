@@ -1,0 +1,15 @@
+#PostNewsFloatinButton {
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    z-index: 10;
+    border-radius: 50%;
+    background-color: #444444;
+}
+
+#PostNewsFloatinButton img {
+    width: 35px;
+    z-index: 10;
+}

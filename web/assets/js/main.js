@@ -1,3 +1,4 @@
+import PostNewsFloatinButton from "./PostNews/PostNewsFloatingButton.js";
 import UserLoggedSession from "./user/session/UserLoggedSession.js";
 import UserSessionMenu from "./user/session/UserSessionMenu.js";
 
@@ -21,8 +22,6 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
 
     function onLogin(sessionInfo) {
 
-        console.log(sessionInfo);
-
         if (sessionInfo.result != 200) {
             return;
         }
@@ -32,6 +31,9 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
         userFloatMenu.setStyle({
             overflow: 'auto'
         });
+
+        PostNewsFloatinButton().addTo(document.body);
+
     }
 
     ajax({

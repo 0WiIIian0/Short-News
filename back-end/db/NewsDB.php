@@ -6,9 +6,14 @@ include_once('DB.php');
 
 class NewsDB extends DB {
 	
+    
     function __construct()
     {
-
+		try {	
+			$this->pdo = new PDO("mysql:host=localhost;dbname=shortnews","root",""); 
+		} catch(PDOException $e) {
+			die('Failed to connect to local database.');
+		}
     }
 
     function insert(
@@ -17,23 +22,21 @@ class NewsDB extends DB {
         $subtitle,
         $content,
         $category,
-        $reactions,
-        $post_date) {
+        $reactions) {
 
         $sql = " insert into news	
-			(user_id, title, subtitle,content,category,rections,post_date) 
+			(user_id, title, subtitle,content,category,reactions) 
 			values 
-			(:user_id,:title,:subtitle,:content,:category,:reactions,:post_date)";
+			(:user_id,:title,:subtitle,:content,:category,:reactions)";
 
-	    $cmd = $pdo->prepare($sql);
+	    $cmd = $this->pdo->prepare($sql);
 
 		$cmd->bindValue(":user_id"   		, $user_id);                   
 		$cmd->bindValue(":title"            , $title); 
 		$cmd->bindValue(":subtitle"         , $subtitle);
 		$cmd->bindValue(":content" 			, $content);
 		$cmd->bindValue(":category"         , $category);
-		$cmd->bindValue(":rections"         , $rections);
-		$cmd->bindValue(":post_date"        , $post_date);
+		$cmd->bindValue(":reactions"        , $reactions);
 
         if($cmd->execute())
 	    {
@@ -41,8 +44,9 @@ class NewsDB extends DB {
 	    }
 	    else
 	    {
-           echo 'Nao foi possivel inserir a noticia';
+           echo json_encode($cmd->errorInfo());
 	    }
+		
 	}// function insert
 
 	function update(
