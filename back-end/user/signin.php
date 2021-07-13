@@ -26,11 +26,13 @@
 		    
             $_SESSION['id']   = $userInfo['id'];
 		    $_SESSION['name'] = $userInfo['name'];
+		    $_SESSION['canPostNews'] = $userInfo['canPostNews'];
 
 			echo json_encode(
 				array(
 					'result' => 200,
-					'username' => $userInfo['name']
+					'username' => $userInfo['name'],
+					'canPostNews' => $userInfo['canPostNews']
 				)
 			);
 	

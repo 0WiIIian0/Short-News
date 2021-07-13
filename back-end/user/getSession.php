@@ -6,7 +6,8 @@
         echo json_encode(
             array(
                 'result' => 200,
-                'username' => $_SESSION['name']
+                'username' => $_SESSION['name'],
+                'canPostNews' => $_SESSION['canPostNews']
             )
         );
     }
