@@ -204,7 +204,6 @@ header {
 #root {
     width: 90%;
     margin: 180px auto 100px auto;
-    min-height: 2000px;
     border-radius: 20px;
     background-color: #111;
 }
@@ -222,3 +221,66 @@ footer {
     }
 
 }
+
+.catalogNews {
+    margin: 40px 20px;
+}
+
+.catalogNews .newsItem {
+    flex: 1;
+    color: #DDDDDD;
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    padding: 20px;
+    min-width: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    background-size: contain;
+    border-radius: 10px;
+    background-image: url("../../../back-end/files/741de90ff15cdf607850f2a54f7d01b5.png");
+}
+
+.catalogNews .newsItem .title {
+    padding: 20px;
+    min-width: 100%;
+    font-size: 30px;
+    box-shadow: 0 0 10px #000000;
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    background-color: rgba(22, 22, 22, 0.5);
+}
+
+.catalogNews .newsItem img {
+
+}
+
+.catalogNews .newsItem .bottomInfo {
+    flex: 1;
+    padding: 20px 10px;
+    position: relative;
+    min-width: 100%;
+    font-size: 31px;
+    box-shadow: 0 0 10px #000000;
+    margin-top: 160px;
+    margin-left: -20px;
+    margin-right: -20px;
+    background-color: rgba(22, 22, 22, 0.5);
+}
+
+.catalogNews .newsItem .bottomInfo .subTitle {
+    margin: 8px 0;
+    padding: 10px 10px;
+    font-size: 22px;
+    border-radius: 10px;
+}
+
+.catalogNews .newsItem .bottomInfo .subTitle {
+
+}
+
+.catalogNews .newsItem .post_date {
+    font-size: 20px;
+}
+

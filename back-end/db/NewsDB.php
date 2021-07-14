@@ -4,15 +4,6 @@ include_once('DB.php');
 
 class NewsDB extends DB {
 
-    function __construct()
-    {
-		try {	
-			$this->pdo = new PDO("mysql:host=localhost;dbname=shortnews","root",""); 
-		} catch(PDOException $e) {
-			die('Failed to connect to local database.');
-		}
-    }
-
      function insert(
         $user_id,
         $title,

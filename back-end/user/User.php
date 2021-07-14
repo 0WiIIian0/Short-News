@@ -41,10 +41,6 @@ class User {
         return $this->db->updatePermission($newPermissionType);
     }
 
-    function checkPassword() {
-        
-    }
-
 };
 
 ?>

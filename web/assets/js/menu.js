@@ -72,14 +72,4 @@
 
     }*/
 
-    ajax({
-        url: '../back-end/news/getNews.php',
-        data: {
-            categories: [1, 2]
-        },
-        complete: (response) => {
-            console.log(response);
-        }
-    })
-
 })();

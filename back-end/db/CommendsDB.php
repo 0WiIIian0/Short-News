@@ -6,11 +6,6 @@ include_once('DB.php');
 
 class CommentsDB extends DB {
 
-    function __construct()
-    {
-
-    }
-
     function insert(
         $user_id,
         $text,
