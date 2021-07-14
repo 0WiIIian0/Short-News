@@ -110,7 +110,7 @@ class NewsDB extends DB {
 
 	function delete($news_id) { 
 
-		$sql = " delete from noticia where id = :id ";
+		$sql = " delete from news where id = :id ";
 
 		$cmd = $this->pdo->prepare($sql);
 
@@ -135,6 +135,34 @@ class NewsDB extends DB {
 		}
 
 	}// function delete
+
+	function select($category){
+
+		$sql = " select * from news where category = :category ";
+
+		$cmd = $this->pdo->prepare($sql);
+
+		$cmd->bindValue(":category", $category);
+
+		if($cmd->execute())
+		{
+			return json_encode(
+				array(
+					'result' => 200
+				)
+			);
+		}
+		else
+		{
+			return json_encode(
+				array(
+					'result' => 500,
+					'message' => 'Failed to select news'
+				)
+			);
+		}
+
+	}// function select
 
 }
 
