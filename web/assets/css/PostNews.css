@@ -81,3 +81,18 @@
     margin-right: 10px;
     border-radius: 10px;
 }
+
+#postNews .button {
+    color: #DDDDDD;
+    padding: 20px;
+    font-size: 20px;
+    min-height: 30px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    background-color: #333333;
+}
+
+#postNews .button img {
+    width: 40px;
+    margin-right: 20px;
+}

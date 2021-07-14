@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 include_once('DB.php');
 
 class NewsDB extends DB {
@@ -77,7 +75,7 @@ class NewsDB extends DB {
 
 	    $cmd = $this->pdo->prepare($sql);
 
-        $id    = $_SESSION['id'];
+        $id    = $user_id;
         
         $cmd->bindValue(":id"        	, $id); 
 		$cmd->bindValue(":user_id"      , $user_id);                   
@@ -110,13 +108,13 @@ class NewsDB extends DB {
 
     }// function update
 
-	function delete() { 
+	function delete($news_id) { 
 
 		$sql = " delete from noticia where id = :id ";
 
 		$cmd = $this->pdo->prepare($sql);
 
-		$cmd->bindValue(":id", $_SESSION['id'] );
+		$cmd->bindValue(":id", $news_id['id']);
 
 		if($cmd->execute())
 		{

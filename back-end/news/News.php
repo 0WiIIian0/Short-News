@@ -29,7 +29,14 @@ class News {
 
     function post($title,$subtitle,$content,$category)
     {
-    	$this->db->insert($_SESSION['id'],$title,$subtitle,$content,$category);
+
+    	return $this->db->insert(
+            $_SESSION['id'],
+            $title,
+            $subtitle,
+            $content,
+            $category
+        );
     }
 
 }

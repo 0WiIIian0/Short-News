@@ -2,6 +2,27 @@ import FileIcon from "../FileHandler/FileIcon.js";
 import UploadFile from "../FileHandler/UploadFile.js";
 import Modal from "../modal/Modal.js";
 
+function postNews(props) {
+
+    return new Promise((resolve, reject) => {
+
+        ajax({
+            url: '../back-end/news/postNews.php',
+            data: {
+                title: props.title,
+                subtitle: props.subtitle,
+                content: props.content,
+                category: 1
+            },
+            complete: (response) => {
+                resolve(response);
+            }
+        });
+
+    });
+
+}
+
 export default function PostNews() {
 
     const modal = Modal();
@@ -89,6 +110,38 @@ export default function PostNews() {
         ]
     });
 
+    const postNewsButton = createElement({
+        class: 'flexBoxAlign button hoverGrow',
+        ripple: '#555555',
+        content: [
+            createElement({
+                tag: 'img',
+                attributes: {
+                    src: './assets/icon/news.svg'
+                }
+            }),
+            createElement({
+                content: 'Post'
+            })
+        ],
+        event: {
+            on: 'click',
+            do: () => {
+
+                postNews({
+                    title: title.value,
+                    subtitle: subTitle.value,
+                    content: JSON.stringify({
+                        content: content.value
+                    })
+                }).then((response) => {
+                    console.log(response);
+                });
+
+            }
+        }
+    });
+
     const postNewsContainer = createElement({
         id: 'postNews',
         class: 'flexBox alignCenter columnDirection',
@@ -109,7 +162,8 @@ export default function PostNews() {
                     subTitle,
                     content,
                     fileList,
-                    fileButton
+                    fileButton,
+                    postNewsButton
                 ]
             })
         ]
