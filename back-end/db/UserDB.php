@@ -59,43 +59,94 @@ class UserDB extends DB {
 	    }
 
 	}// function insert
+    function updateName($name)
+    {
+    	$sql = "update users set 
+    	        name = :name 
+    	        where id = :id";
 
-	function update(
-    	$name,
-        $email,
-        $pass,
-        $permission_type) { 
+    	$cmd = $this->pdo->prepare($sql);
 
-		$sql = " update users set	
-					name            = :name   , 
-					email           = :email  ,
-					pass            = :pass   ,
-					permission_type = :permission_type
+        $id = $_SESSION['id'];
 
-				 where id = :id";
+        $cmd->bindValue(":name" , $name); 
 
-	    $cmd = $this->pdo->prepare($sql);
-
-        $id    = $_SESSION['id'];
-        
-        $cmd->bindValue(":id"        			, $id); 
-		$cmd->bindValue(":name"      			, $name);                   
-		$cmd->bindValue(":email"     			, $email); 
-		$cmd->bindValue(":pass"      			, $pass);
-		$cmd->bindValue(":permission_type"      , $permission_type);
-
-
-	    if($cmd->execute())
+        if($cmd->execute())
 	    {
-         	echo 'O usuario foi atualizado';
+         	echo 'O nome foi atualizado';
 	    }
 	    else
 	    {
-            echo 'Nao foi possivel atuzalizar o usuario';
+            echo 'Nao foi possivel atuzalizar o nome';
 	    }
+    }// function updateNome
 
+    function updateEmail($email)
+    {
+    	$sql = "update users set 
+    	        email = :email 
+    	        where id = :id";
 
-	}// function update
+    	$cmd = $this->pdo->prepare($sql);
+
+        $id = $_SESSION['id'];
+
+        $cmd->bindValue(":email" , md5($email)); 
+
+        if($cmd->execute())
+	    {
+         	echo 'O email foi atualizado';
+	    }
+	    else
+	    {
+            echo 'Nao foi possivel atuzalizar o email';
+	    }
+    }// function updateEmail
+
+    function updatePass($pass)
+    {
+    	$sql = "update users set 
+    	        pass = :pass 
+    	        where id = :id";
+
+    	$cmd = $this->pdo->prepare($sql);
+
+        $id = $_SESSION['id'];
+
+        $cmd->bindValue(":pass" , password_hash($pass, PASSWORD_DEFAULT)); 
+
+        if($cmd->execute())
+	    {
+         	echo 'O password foi atualizado';
+	    }
+	    else
+	    {
+            echo 'Nao foi possivel atuzalizar o password';
+	    }
+    }// function updatePass
+
+    function updatePermission($permission_type)
+    {
+    	$sql = "update users set 
+    	        permission_type = :permission_type 
+    	        where id = :id";
+
+    	$cmd = $this->pdo->prepare($sql);
+
+        $id = $_SESSION['id'];
+
+        $cmd->bindValue(":permission_type" , $permission_type); 
+
+        if($cmd->execute())
+	    {
+         	echo 'A permissao foi atualizado';
+	    }
+	    else
+	    {
+            echo 'Nao foi possivel atuzalizar a permissao';
+	    }
+    }// function updatePermission
+
 
 	function delete() { 
 
