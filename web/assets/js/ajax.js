@@ -31,7 +31,13 @@
         if (typeof props.data != "undefined") {
 
             for (let item in props.data) {
-                data.append(item, props.data[item]);
+
+                if (typeof props.data[item] == 'object') {
+                    data.append(item, JSON.stringify(props.data[item]));    
+                } else {
+                    data.append(item, props.data[item]);
+                }
+
             }
 
         }

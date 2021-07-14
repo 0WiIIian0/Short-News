@@ -12,18 +12,13 @@ class News {
     function getAll($categories) {
 
         if (count($categories) == 0) {
-            return false;
+            return json_encode(array(
+                'result' => 500,
+                'message' => 'You need to provide one category or more'
+            ));
         }
 
-        $whereClause = '';
-
-        foreach ($categories as $category) {
-            $whereClause += 'category = $category or';
-        }
-
-        $whereClause = substr($whereClause, 0, strlen($whereClause) - 3);
-
-        $this->db->select($whereClause);
+        return $this->db->select($categories);
 
     }
 

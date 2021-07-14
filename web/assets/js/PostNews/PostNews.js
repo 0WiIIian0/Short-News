@@ -135,7 +135,16 @@ export default function PostNews() {
                         content: content.value
                     })
                 }).then((response) => {
-                    console.log(response);
+                    
+                    /* TODO: handler possible error when posting news */
+
+                    if (response.result == 200) {
+                        title.value = '';
+                        subTitle.value = '';
+                        content.value = '';
+                        modal.close();
+                    }
+
                 });
 
             }

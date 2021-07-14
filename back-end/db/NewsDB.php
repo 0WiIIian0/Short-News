@@ -136,19 +136,40 @@ class NewsDB extends DB {
 
 	}// function delete
 
-	function select($category){
+	function mountQuery($categories, $sql) {
 
-		$sql = " select * from news where category = :category ";
+		$categoryIndex = 0;
+		foreach($categories as $category) {
+			$sql = $sql.' category = :category'.$categoryIndex.' or';
+			$categoryIndex++;
+		}
+
+		$sql = substr($sql, 0, strlen($sql) - 3);
 
 		$cmd = $this->pdo->prepare($sql);
 
-		$cmd->bindValue(":category", $category);
+		$categoryIndex = 0;
+		foreach($categories as $category) {
+			$cmd->bindValue('category'.$categoryIndex, $category);
+			$categoryIndex++;
+		}
+
+		return $cmd;
+
+	}
+
+	function select($categories){
+
+		$sql = "select * from news where";
+		
+		$cmd = $this->mountQuery($categories, $sql);
 
 		if($cmd->execute())
 		{
 			return json_encode(
 				array(
-					'result' => 200
+					'result' => 200,
+					'newsList' => $cmd->fetchAll(PDO::FETCH_CLASS)
 				)
 			);
 		}
@@ -157,6 +178,7 @@ class NewsDB extends DB {
 			return json_encode(
 				array(
 					'result' => 500,
+					'sql' => $sql,
 					'message' => 'Failed to select news'
 				)
 			);
