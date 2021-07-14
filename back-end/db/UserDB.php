@@ -69,7 +69,8 @@ class UserDB extends DB {
 
         $id = $_SESSION['id'];
 
-        $cmd->bindValue(":name" , $name); 
+        $cmd->bindValue(":id", $id); 
+        $cmd->bindValue(":name" , $name);
 
         if($cmd->execute())
 	    {
@@ -91,6 +92,7 @@ class UserDB extends DB {
 
         $id = $_SESSION['id'];
 
+        $cmd->bindValue(":id", $id); 
         $cmd->bindValue(":email" , md5($email)); 
 
         if($cmd->execute())
@@ -113,6 +115,7 @@ class UserDB extends DB {
 
         $id = $_SESSION['id'];
 
+        $cmd->bindValue(":id", $id); 
         $cmd->bindValue(":pass" , password_hash($pass, PASSWORD_DEFAULT)); 
 
         if($cmd->execute())
@@ -135,6 +138,7 @@ class UserDB extends DB {
 
         $id = $_SESSION['id'];
 
+        $cmd->bindValue(":id", $id); 
         $cmd->bindValue(":permission_type" , $permission_type); 
 
         if($cmd->execute())
