@@ -6,7 +6,7 @@ class DB {
 		$this->connect();
 	}
 
-	function connect() {
+	private function connect() {
 		try {	
 			$this->pdo = new PDO("mysql:host=localhost;dbname=shortnews","root",""); 
 		} catch(PDOException $e) {

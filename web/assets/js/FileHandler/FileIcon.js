@@ -61,6 +61,11 @@ export default function FileIcon(props) {
 
                     if (response.result == 200) {
                         icon.parentElement.removeChild(icon);
+
+                        if (props.onDelete) {
+                            props.onDelete();
+                        }
+
                     } else {
                         console.log(`failed to delete file "${props.name}"`);
                     }

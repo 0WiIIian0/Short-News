@@ -1,4 +1,4 @@
-import CatalogNews from "./HomePageNews/CatalogNews.js";
+import NewsCatalog from "./HomePageNews/NewsCatalog.js";
 import PostNews from "./PostNews/PostNews.js";
 import PostNewsFloatinButton from "./PostNews/PostNewsFloatingButton.js";
 import UserLoggedSession from "./user/session/UserLoggedSession.js";
@@ -12,7 +12,7 @@ import UserSessionMenu from "./user/session/UserSessionMenu.js";
     const postNews = PostNews();
     const postNewsFloatinButton = PostNewsFloatinButton();
 
-    const catalogNews = CatalogNews().addTo(root);
+    NewsCatalog().addTo(root);
 
     elementManager.setDefaultMethods(userFloatMenu);
 

@@ -204,6 +204,7 @@ header {
 #root {
     width: 90%;
     margin: 180px auto 100px auto;
+    min-height: 500px;
     border-radius: 20px;
     background-color: #111;
 }
@@ -229,22 +230,22 @@ footer {
 .catalogNews .newsItem {
     flex: 1;
     color: #DDDDDD;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     margin: 20px;
     padding: 20px;
-    min-width: 300px;
-    max-width: 300px;
-    max-height: 300px;
-    background-size: contain;
+    min-width: 200px;
+    max-width: 200px;
+    max-height: 200px;
     border-radius: 10px;
-    background-image: url("../../../back-end/files/741de90ff15cdf607850f2a54f7d01b5.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
 }
 
 .catalogNews .newsItem .title {
     padding: 20px;
     min-width: 100%;
-    font-size: 30px;
+    font-size: 22px;
     box-shadow: 0 0 10px #000000;
     margin-top: -20px;
     margin-left: -20px;
@@ -252,35 +253,42 @@ footer {
     background-color: rgba(22, 22, 22, 0.5);
 }
 
-.catalogNews .newsItem img {
-
-}
-
 .catalogNews .newsItem .bottomInfo {
     flex: 1;
-    padding: 20px 10px;
+    height: 72px;
+    min-height: 72px;
+    max-height: 72px;
+    padding: 10px;
     position: relative;
     min-width: 100%;
-    font-size: 31px;
+    font-size: 18px;
     box-shadow: 0 0 10px #000000;
-    margin-top: 160px;
+    margin-top: 80px;
     margin-left: -20px;
     margin-right: -20px;
     background-color: rgba(22, 22, 22, 0.5);
 }
 
 .catalogNews .newsItem .bottomInfo .subTitle {
+    flex: 4;
     margin: 8px 0;
-    padding: 10px 10px;
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 10px;
 }
 
-.catalogNews .newsItem .bottomInfo .subTitle {
-
-}
-
 .catalogNews .newsItem .post_date {
+    flex: 1;
     font-size: 20px;
 }
 
+.newsModal {
+    top: 5%;
+    right: 5%;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    animation: clickJump linear 0.3s;
+    box-shadow: 0 0 20px #000000;
+    border-radius: 20px;
+    background-color: #222222;
+}

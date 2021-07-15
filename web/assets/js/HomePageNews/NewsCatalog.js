@@ -1,11 +1,11 @@
-import CatalogNewsItem from "./CatalogNewsItem.js";
+import NewsCatalogItem from "./NewsCatalogItem.js";
 
 function loadNews() {
     
     return new Promise((resolve, reject) => {
 
         ajax({
-            url: '../back-end/news/getNews.php',
+            url: '../back-end/news/getNewsCatalogPreview.php',
             data: {
                 categories: [1, 2]
             },
@@ -24,8 +24,8 @@ function loadNews() {
 
 }
 
-function createCatalogNewsItem(newsInfo) {
-    return CatalogNewsItem(newsInfo);
+function createNewsCatalogItem(newsInfo) {
+    return NewsCatalogItem(newsInfo);
 }
 
 export default function CatalogNews() {
@@ -37,7 +37,7 @@ export default function CatalogNews() {
     loadNews().then((newsList) => {
 
         newsList.forEach((news) => {
-            createCatalogNewsItem(news).addTo(catalogNews);
+            createNewsCatalogItem(news).addTo(catalogNews);
         });
 
     });

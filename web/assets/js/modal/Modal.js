@@ -47,7 +47,11 @@ export default function Modal() {
         });
 
         setTimeout(() => {
-            document.body.removeChild(modal);
+
+            if (modal.parentElement != null) {
+                document.body.removeChild(modal);
+            }
+
         }, 290);
 
     }

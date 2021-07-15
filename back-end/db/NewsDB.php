@@ -4,26 +4,21 @@ include_once('DB.php');
 
 class NewsDB extends DB {
 
-     function insert(
-        $user_id,
-        $title,
-        $subtitle,
-        $content,
-        $category
-        ) {
+     function insert($postInfo) {
 
         $sql = " insert into news	
-			(user_id, title, subtitle,content,category) 
+			(user_id, title, subtitle, cover, content, category) 
 			values 
-			(:user_id,:title,:subtitle,:content,:category)";
+			(:user_id, :title, :subtitle, :cover, :content, :category)";
 
 	    $cmd = $this->pdo->prepare($sql);
 
-		$cmd->bindValue(":user_id"   		, $user_id);                   
-		$cmd->bindValue(":title"            , $title); 
-		$cmd->bindValue(":subtitle"         , $subtitle);
-		$cmd->bindValue(":content" 			, $content);
-		$cmd->bindValue(":category"         , $category);
+		$cmd->bindValue(":user_id"   , $postInfo['id']);                   
+		$cmd->bindValue(":title"     , $postInfo['title']); 
+		$cmd->bindValue(":subtitle"  , $postInfo['subtitle']);
+		$cmd->bindValue(":cover"     , $postInfo['cover']);
+		$cmd->bindValue(":content" 	 , $postInfo['content']);
+		$cmd->bindValue(":category"  , $postInfo['category']);
 
         if($cmd->execute())
 	    {
@@ -149,9 +144,9 @@ class NewsDB extends DB {
 
 	}
 
-	function select($categories){
+	function getAllNewsPreview($categories){
 
-		$sql = "select * from news where";
+		$sql = "select id, title, subtitle, cover, post_date from news where";
 		
 		$cmd = $this->mountQuery($categories, $sql);
 
@@ -169,7 +164,6 @@ class NewsDB extends DB {
 			return json_encode(
 				array(
 					'result' => 500,
-					'sql' => $sql,
 					'message' => 'Failed to select news'
 				)
 			);
@@ -177,49 +171,22 @@ class NewsDB extends DB {
 
 	}// function select
 
-	function selectByTitle($news_id)
+	function selectByID($news_id)
 	{
-		$sql = "select title,subtitle,content
-		        where";
 
-        $cmd = $this->pdo->prepare($sql);
-
-		$cmd->bindValue(":id", $news_id['id']);		
-
-		if($cmd->execute())
-		{
-			return json_encode(
-				array(
-					'result' => 200,					
-				)
-			);
-		}
-		else
-		{
-			return json_encode(
-				array(
-					'result' => 500,
-					'sql' => $sql,
-					'message' => 'Failed to select news'
-				)
-			);
-		}
-	}// function selectByTitle
-
-	function selectByContent($news_id)
-	{
-		$sql = "select content 
-		        where id = :id"
+		$sql = "select content from news
+		        where id = :id";
 
 		$cmd = $this->pdo->prepare($sql);
 
-		$cmd->bindValue(":id", $news_id['id']);
+		$cmd->bindValue(":id", $news_id);
 
         if($cmd->execute())
 		{
 			return json_encode(
 				array(
-					'result' => 200,					
+					'result' => 200,
+					'content' => $cmd->fetch()				
 				)
 			);
 		}
@@ -228,12 +195,11 @@ class NewsDB extends DB {
 			return json_encode(
 				array(
 					'result' => 500,
-					'sql' => $sql,
 					'message' => 'Failed to select news'
 				)
 			);
 		}
-	}//function selectContent
+	} //function selectContent
 
 
 

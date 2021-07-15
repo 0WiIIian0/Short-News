@@ -18,20 +18,21 @@ class News {
             ));
         }
 
-        return $this->db->select($categories);
+        return $this->db->getAllNewsPreview($categories);
 
     }
 
-    function post($title,$subtitle,$content,$category)
+    function getNewsContent($news_id) {
+        return $this->db->selectByID($news_id);
+    }
+
+    function post($postInfo)
     {
 
-    	return $this->db->insert(
-            $_SESSION['id'],
-            $title,
-            $subtitle,
-            $content,
-            $category
-        );
+        $postInfo['id'] = $_SESSION['id'];
+        
+    	return $this->db->insert($postInfo);
+        
     }
 
 }
