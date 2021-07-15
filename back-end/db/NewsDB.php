@@ -177,6 +177,66 @@ class NewsDB extends DB {
 
 	}// function select
 
+	function selectByTitle($news_id)
+	{
+		$sql = "select title,subtitle,content
+		        where";
+
+        $cmd = $this->pdo->prepare($sql);
+
+		$cmd->bindValue(":id", $news_id['id']);		
+
+		if($cmd->execute())
+		{
+			return json_encode(
+				array(
+					'result' => 200,					
+				)
+			);
+		}
+		else
+		{
+			return json_encode(
+				array(
+					'result' => 500,
+					'sql' => $sql,
+					'message' => 'Failed to select news'
+				)
+			);
+		}
+	}// function selectByTitle
+
+	function selectByContent($news_id)
+	{
+		$sql = "select content 
+		        where id = :id"
+
+		$cmd = $this->pdo->prepare($sql);
+
+		$cmd->bindValue(":id", $news_id['id']);
+
+        if($cmd->execute())
+		{
+			return json_encode(
+				array(
+					'result' => 200,					
+				)
+			);
+		}
+		else
+		{
+			return json_encode(
+				array(
+					'result' => 500,
+					'sql' => $sql,
+					'message' => 'Failed to select news'
+				)
+			);
+		}
+	}//function selectContent
+
+
+
 }
 
 ?>
